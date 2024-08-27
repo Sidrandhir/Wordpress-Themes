@@ -1,0 +1,70 @@
+{
+	"name": "themes",
+	"version": "1.0.564",
+	"description": "Automattic public themes",
+	"author": "automattic",
+	"license": "GPL-2.0",
+	"prettier": "@wordpress/prettier-config",
+	"scripts": {
+		"sandbox:clean": "node ./theme-utils.mjs clean-sandbox",
+		"local:clean": "git reset --hard HEAD; git clean -fd",
+		"batch:install": "./theme-batch-utils.sh install-dependencies",
+		"batch:build": "./theme-batch-utils.sh build-all",
+		"batch:audit:fix": "./theme-batch-utils.sh audit-dependencies",
+		"batch:update": "./theme-batch-utils.sh update-dependencies",
+		"deploy:version-bump": "node ./theme-utils.mjs version-bump-themes",
+		"deploy:push:all": "node ./theme-utils.mjs push-to-sandbox",
+		"deploy:push:changes": "node ./theme-utils.mjs push-changes-to-sandbox",
+		"deploy:push:theme": "node ./theme-utils.mjs push-theme-to-sandbox",
+		"deploy": "node ./theme-utils.mjs push-button-deploy",
+		"deploy:core:sync": "node ./theme-utils.mjs deploy-sync-core-theme",
+		"deploy:preview": "node ./theme-utils.mjs deploy-preview",
+		"deploy:theme": "node ./theme-utils.mjs deploy-theme",
+		"deploy:zip": "node ./theme-utils.mjs build-com-zip",
+		"deploy:land": "node ./theme-utils.mjs land-diff",
+		"deploy:add-strict-typing": "node ./theme-utils.mjs add-strict-typing",
+		"pull:all": "node ./theme-utils.mjs pull-all-themes",
+		"core:pull": "node ./theme-utils.mjs pull-core-themes",
+		"core:push": "node ./theme-utils.mjs push-core-themes",
+		"core:sync": "node ./theme-utils.mjs sync-core-theme",
+		"patterns:escape": "node ./theme-utils.mjs escape-patterns",
+		"prepare": "husky install"
+	},
+	"devDependencies": {
+		"@octokit/rest": "^19.0.8",
+		"@wordpress/prettier-config": "^2.16.0",
+		"@wordpress/scripts": "^26.4.0",
+		"@wordpress/stylelint-config": "^21.16.0",
+		"chokidar-cli": "^3.0.0",
+		"fs-extra": "^11.1.1",
+		"husky": "^8.0.3",
+		"inquirer": "^9.2.3",
+		"lint-staged": "^13.2.2",
+		"lodash": "^4.17.21",
+		"octokit": "^2.0.14",
+		"open": "^9.1.0",
+		"parse5-html-rewriting-stream": "^7.0.0",
+		"semver": "^7.5.1",
+		"string-progressbar": "^1.0.4",
+		"table": "^6.8.1"
+	},
+	"stylelint": {
+		"extends": "@wordpress/stylelint-config",
+		"defaultSeverity": "warning"
+	},
+	"lint-staged": {
+		"*.scss": [
+			"wp-scripts lint-style --fix --custom-syntax postcss-scss"
+		]
+	},
+	"dependencies": {
+		"wp-prettier": "^2.8.5"
+	},
+	"engines": {
+		"node": ">=18.0.0",
+		"npm": ">=9.0.0"
+	},
+	"workspaces": [
+		"*"
+	]
+}
